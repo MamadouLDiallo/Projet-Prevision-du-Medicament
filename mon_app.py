@@ -94,7 +94,7 @@ if menu == "Accueil":
 # Section de chargement des données
 if menu == "Chargement des Données":
     
-    st.title("Chargement des Données")
+    #st.title("Chargement des Données")
     
     uploaded_file = st.file_uploader("Importer votre fichier Excel", type=["xlsx"])
     
