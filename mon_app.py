@@ -74,17 +74,13 @@ def preprocess_data(df):
     # --- Main Application Logic ---
 if menu == "Accueil":
     
-    st.title("Analyse de Prescription d'un médicament")
+    st.title(" 🩺 Analyse de Prescription d'un médicament")
 
 # Image d'accueil
 #st.image("medicament.png", width=100)  # Image illustrant le projet
 
 # Titre
-st.markdown("""
-# 🩺 Analyse de Prescription d'un Médicament
-
-🎯 Ce projet utilise les données médicales pour recommander le traitement le plus adapté à chaque patient grâce au machine learning.
-""")
+st.markdown("""🎯 Ce projet utilise les données médicales pour recommander le traitement le plus adapté à chaque patient grâce au machine learning.""")
 
 # Organisation des infos de contact
 col1, col2, col3, col4 = st.columns(4)
@@ -104,12 +100,6 @@ with col3:
 with col4:
     st.markdown("**🔗 LinkedIn**")
     st.markdown("[LinkedIn](https://www.linkedin.com)")
-
-# Contexte
-st.markdown("""
----
-_Projet réalisé dans le cadre des travaux dirigés en analyse de données médicales._
-""")
 
 # Section de chargement des données
 if menu == "Chargement des Données":
