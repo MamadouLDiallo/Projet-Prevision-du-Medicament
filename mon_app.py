@@ -76,7 +76,7 @@ if menu == "Accueil":
     
     st.title("Analyse de Prescription d'un médicament")
     
-    st.markdown()
+    st.markdown("""""")
 
 
     # Create three columns layout
