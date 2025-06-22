@@ -77,7 +77,7 @@ if menu == "Accueil":
   #st.title("🩺Analyse de Prescription d'un médicament")
     
   #st.markdown("**🩺 ## Analyse de Prescription d'un médicament**")
-  st.markdown("# 🩺 Analyse de Prescription d'un médicament")
+  st.markdown("## 🩺 **Analyse de Prescription d'un médicament**")
   st.markdown("---")
 
 # Titre et résumé
