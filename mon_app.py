@@ -69,41 +69,33 @@ def preprocess_data(df):
     df_encoded = manual_encoder(df_cleaned, cat_columns)
     return df_encoded
 
-# Section Accueil
 if menu == "Accueil":
-    st.title("📊 Analyse des Prescriptions Médicales")
-    st.header("📈 Application de Prédiction des Médicaments à partir de Données Médicales", divider='rainbow')
     
-    # Image d'en-tête
-    st.image("https://cdn-icons-png.flaticon.com/512/3014/3014967.png", width=200, caption="Prédiction des prescriptions médicales")
-    
-    # À propos de nous
-    st.subheader("À propos de nous")
-    st.write("Nous sommes une équipe dédiée à l'analyse des données médicales pour optimiser les prescriptions de médicaments.")
-    st.write("Notre objectif est de fournir des insights précis à partir des données des patients pour aider les professionnels de santé à mieux comprendre les besoins de leurs patients et à recommander les traitements les plus adaptés.")
-    
-    # Présentation du membre (layout à 4 colonnes)
+    st.title("Présentation du mbembre du projet")
+    # Create three columns layout
     left_column, middle1_column, middle2_column, right_column = st.columns(4)
-    
-    # Colonne de gauche - Nom
+
+# Left column - Email
     left_column.subheader("Nom")
-    left_column.write("**Mamadou Lamarana Diallo**")
+    left_column.markdown("**Mamadou Lamarana Diallo**")
     
-    # Colonne centrale 1 - Email
-    middle1_column.subheader("✉️ Email")
-    middle1_column.write("[mamadoulamaranadiallomld1@gmail.com](mailto:mamadoulamaranadiallomld1@gmail.com)")
-    
-    # Colonne centrale 2 - Contact
-    middle2_column.subheader("📞 Contact")
-    middle2_column.write("[+221 771050342](tel:+221771050342)")
-    
-    # Colonne de droite - LinkedIn
-    right_column.subheader("LinkedIn")
-    right_column.markdown("""<img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20" style="vertical-align: middle;"> [LinkedIn](https://www.linkedin.com/in/mamadou-lamarana-diallo-937430274/)""", unsafe_allow_html=True)
+# middle1 column - Email
+    middle1_column.subheader("📧 Email")
+    middle1_column.markdown("[mamadoulamaranadiallomld1@gmail.com](mailto:mamadoulamaranadiallomld1@gmail.com)")
+
+# Middle2 column - Phone
+    middle2_column.subheader("☎️ Contact ")
+    middle2_column.markdown("[+221 771050342](tel:+221771050342)")
+
+# Right column - Linkedin
+    right_column.markdown("""<h3><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20" style="vertical-align: middle;"> LinkedIn</h3> """, unsafe_allow_html=True)
+    right_column.markdown("[Linkedin](https://www.linkedin.com/in/mamadou-lamarana-diallo-937430274/)")
 
 # Section de chargement des données
 if menu == "Chargement des Données":
+    
     st.title("Chargement des Données")
+    
     uploaded_file = st.file_uploader("Importer votre fichier Excel", type=["xlsx"])
     
     if uploaded_file is not None:
@@ -251,7 +243,7 @@ if menu == "Visualisations":
             elif vis_option == "Sexe vs Médicament":
                 crosstab = pd.crosstab(df_raw['Sex'], df_raw['Drug'])
                 fig, ax = plt.subplots(figsize=(10, 6))
-                crosstab.plot(kind='bar', stacked=True, ax=ax)
+                crosstab.plot(kind='bar', stacstked=True, ax=ax)
                 ax.set_title("Sexe vs Médicament")
                 ax.set_xlabel("Sexe")
                 ax.set_ylabel("Nombre")
@@ -344,40 +336,41 @@ if menu == "Prédiction pour Patient":
                 new_data[col] = st.sidebar.selectbox("Cholestérol :", ['NORMAL', 'HIGH'])
             elif col == 'Age':
                 new_data[col] = st.sidebar.number_input("Âge :", min_value=1, max_value=100, value=30)
+            #elif col == 'Na':
+                #new_data[col] = st.sidebar.number_input("Sodium (Na) [mmol/L] :", min_value=100.0, max_value=160.0, value=140.0, step=0.5)
+            #elif col == 'K':
+                #new_data[col] = st.sidebar.number_input("Potassium (K) [mmol/L] :", min_value=2.0, max_value=7.0, value=4.0, step=0.1)
+             
             elif col == 'Na':
-                new_data[col] = st.sidebar.number_input("Sodium (Na) :", min_value=0.0, max_value=1.0, value=0.7, step=0.01)
+                    new_data[col] = st.sidebar.number_input("Sodium (Na) :", min_value=0.0, max_value=1.0, value=0.7, step=0.01)
             elif col == 'K':
                 new_data[col] = st.sidebar.number_input("Potassium (K) :", min_value=0.0, max_value=0.1, value=0.05, step=0.001)
+        # Calculer le ratio Na/K
+        new_data['Na_sur_K'] = new_data['Na'] / new_data['K']
         
-        # Calculer le ratio Na/K avec vérification
-        if new_data.get('K', 0) == 0:
-            st.error("La valeur de Potassium (K) ne peut pas être zéro.")
-        else:
-            new_data['Na_sur_K'] = new_data['Na'] / new_data['K']
+        # Créer un DataFrame
+        new_data_df = pd.DataFrame([new_data])
+        new_data_df = manual_encoder(new_data_df, ['BP', 'Cholesterol'])
+        
+        # Assurer l'ordre des colonnes
+        new_data_df = new_data_df[st.session_state.X_train.columns]
+        
+        if st.sidebar.button("Prédire le Médicament"):
+            # Mettre à l'échelle les données
+            new_data_scaled = st.session_state.scaler.transform(new_data_df)
             
-            # Créer un DataFrame
-            new_data_df = pd.DataFrame([new_data])
-            new_data_df = manual_encoder(new_data_df, ['BP', 'Cholesterol'])
+            # Faire la prédiction
+            prediction = st.session_state.model.predict(new_data_scaled)[0]
+            prediction_proba = st.session_state.model.predict_proba(new_data_scaled)[0]
             
-            # Assurer l'ordre des colonnes
-            new_data_df = new_data_df[st.session_state.X_train.columns]
+            # Décoder la prédiction
+            predicted_drug = st.session_state.drug_labels[prediction]
             
-            if st.sidebar.button("Prédire le Médicament"):
-                # Mettre à l'échelle les données
-                new_data_scaled = st.session_state.scaler.transform(new_data_df)
-                
-                # Faire la prédiction
-                prediction = st.session_state.model.predict(new_data_scaled)[0]
-                prediction_proba = st.session_state.model.predict_proba(new_data_scaled)[0]
-                
-                # Décoder la prédiction
-                predicted_drug = st.session_state.drug_labels[prediction]
-                
-                st.subheader("Résultats de la Prédiction")
-                st.write(f"Médicament Recommandé : **{predicted_drug}**")
-                st.write("Probabilités de Prédiction :")
-                drug_labels = st.session_state.drug_labels
-                for drug, prob in zip(drug_labels, prediction_proba):
-                    st.write(f"{drug}: {prob:.3f}")
+            st.subheader("Résultats de la Prédiction")
+            st.write(f"Médicament Recommandé : **{predicted_drug}**")
+            st.write("Probabilités de Prédiction :")
+            drug_labels = st.session_state.drug_labels
+            for drug, prob in zip(drug_labels, prediction_proba):
+                st.write(f"{drug}: {prob:.3f}")
     else:
         st.warning("Veuillez entraîner le modèle d'abord dans la section Entraînement du Modèle.")
