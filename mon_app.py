@@ -75,7 +75,7 @@ def preprocess_data(df):
 if menu == "Accueil":
     
     st.title("📊 Analyse et Segmentation des clients pour la decision marketing ")
-    st.header("📈 Application d'analyse comportementale a partir de données transactionnelles", divider='rainbow')
+    #st.header("📈 Application d'analyse comportementale a partir de données transactionnelles", divider='rainbow')
     try:
         image = Image.open(".jpg")
     except FileNotFoundError:
