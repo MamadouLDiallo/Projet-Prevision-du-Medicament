@@ -71,26 +71,35 @@ def preprocess_data(df):
 
 # Section Accueil
 if menu == "Accueil":
-    st.title("📊 Application d'Analyse des Prescriptions Médicales")
+    st.title("📊 Analyse des Prescriptions Médicales")
+    st.header("📈 Application de Prédiction des Médicaments à partir de Données Médicales", divider='rainbow')
     
     # Image d'en-tête
     st.image("https://cdn-icons-png.flaticon.com/512/3014/3014967.png", width=200, caption="Prédiction des prescriptions médicales")
     
     # À propos de nous
     st.subheader("À propos de nous")
-    st.write("""
-        Nous sommes une équipe dédiée à l'analyse des données médicales pour optimiser les prescriptions de médicaments.
-        Notre objectif est de fournir des insights précis à partir des données des patients pour aider les professionnels de santé à mieux comprendre les besoins de leurs patients et à recommander les traitements les plus adaptés.
-    """)
+    st.write("Nous sommes une équipe dédiée à l'analyse des données médicales pour optimiser les prescriptions de médicaments.")
+    st.write("Notre objectif est de fournir des insights précis à partir des données des patients pour aider les professionnels de santé à mieux comprendre les besoins de leurs patients et à recommander les traitements les plus adaptés.")
     
-    # Présentation du membre
-    st.subheader("Membre de l'équipe")
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.write("👤 **Nom** : Mamadou Lamarana Diallo")
-        st.write("✉️ **Email** : mamadoulamaranadiallomld1@gmail.com")
-        st.write("📞 **Contact** : +221 771050342")
-        st.write("🧑‍💼 **LinkedIn** : [LinkedIn](https://www.linkedin.com/in/mamadou-lamarana-diallo-937430274/)")
+    # Présentation du membre (layout à 4 colonnes)
+    left_column, middle1_column, middle2_column, right_column = st.columns(4)
+    
+    # Colonne de gauche - Nom
+    left_column.subheader("Nom")
+    left_column.write("**Mamadou Lamarana Diallo**")
+    
+    # Colonne centrale 1 - Email
+    middle1_column.subheader("✉️ Email")
+    middle1_column.write("[mamadoulamaranadiallomld1@gmail.com](mailto:mamadoulamaranadiallomld1@gmail.com)")
+    
+    # Colonne centrale 2 - Contact
+    middle2_column.subheader("📞 Contact")
+    middle2_column.write("[+221 771050342](tel:+221771050342)")
+    
+    # Colonne de droite - LinkedIn
+    right_column.subheader("LinkedIn")
+    right_column.markdown("""<img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20" style="vertical-align: middle;"> [LinkedIn](https://www.linkedin.com/in/mamadou-lamarana-diallo-937430274/)""", unsafe_allow_html=True)
 
 # Section de chargement des données
 if menu == "Chargement des Données":
