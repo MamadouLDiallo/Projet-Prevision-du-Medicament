@@ -87,7 +87,7 @@ col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     st.markdown("**👤 Nom**")
-    st.markdown("Mamadou Lamarana Diallo")
+    st.markdown("**Mamadou Lamarana Diallo**")
 
 with col2:
     st.markdown("**📧 Email**")
