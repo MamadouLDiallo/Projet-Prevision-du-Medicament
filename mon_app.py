@@ -163,4 +163,102 @@ if menu == "Chargement des Données":
     if uploaded_file is not None:
         if st.session_state.df is None or uploaded_file.name != st.session_state.last_uploaded_filename:
             try:
-                df_temp
+                df_temp = pd.read_excel(uploaded_file)
+                st.session_state.df_raw = df_temp.copy()  # Conserver les données brutes
+                st.session_state.df = preprocess_data(df_temp)
+                st.session_state.last_uploaded_filename = uploaded_file.name
+                st.success("Fichier chargé et traité avec succès !")
+            except Exception as e:
+                st.error(f"Erreur lors du chargement : {e}")
+                st.session_state.df = None
+                st.session_state.df_raw = None
+
+# Section des statistiques descriptives
+if menu == "Statistiques Descriptives":
+    st.title("Statistiques Descriptives")
+    if st.session_state.df is not None and st.session_state.df_raw is not None:
+        df = st.session_state.df
+        df_raw = st.session_state.df_raw
+        
+        # Aperçu des données brutes
+        st.subheader("Aperçu des Données Brutes")
+        st.dataframe(df_raw.head(10))
+        
+        # Informations de base
+        st.subheader("Informations de Base")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.write(f"Nombre de lignes : {df.shape[0]}")
+            st.write(f"Nombre de colonnes : {df.shape[1]}")
+        with col2:
+            st.write("**Valeurs manquantes :**")
+            # Utiliser df_raw pour inclure Sex
+            missing_values = df_raw.isna().sum()
+            for col, count in missing_values.items():
+                st.write(f"{col}: {count}")
+            st.write(f"**Vérification de données dupliquées :** {df.duplicated().sum()}")
+        
+        # Statistiques des variables numériques
+        st.subheader("Statistiques des Variables Numériques")
+        num_cols = ['Age', 'Na', 'K']
+        st.dataframe(df[num_cols].describe().T)
+        
+        # Distribution des variables catégoriques
+        st.subheader("Distribution des Variables Catégoriques")
+        cat_cols = ['BP', 'Cholesterol', 'Drug']
+        for col in cat_cols:
+            st.write(f"\nDistribution de {col} :")
+            # Utiliser df_raw pour afficher les modalités d'origine
+            st.dataframe(df_raw[col].value_counts())
+        
+        # Analyse des valeurs aberrantes
+        st.subheader("Analyse des Valeurs Aberrantes")
+        for var in num_cols:
+            fig, ax = plt.subplots(figsize=(4, 2))
+            sns.boxplot(data=df, x=var, ax=ax)
+            ax.set_title(f"Boxplot de {var}")
+            st.pyplot(fig)
+    else:
+        st.warning("Veuillez charger un fichier de données d'abord.")
+
+# Section des visualisations
+if menu == "Visualisations":
+    st.title("Visualisations des Données")
+    if st.session_state.df is not None and st.session_state.df_raw is not None:
+        df = st.session_state.df
+        df_raw = st.session_state.df_raw
+        
+        # Sous-menu pour univariée ou bivariée
+        analysis_type = st.radio("Type d'Analyse", ["Analyse Univariée", "Analyse Bivariée"])
+        
+        if analysis_type == "Analyse Univariée":
+            vis_option = st.selectbox("Sélectionner la Visualisation", [
+                "Distribution des Variables Numériques",
+                "Pairplot des Variables Numériques",
+                "Distribution des Variables Qualitatives"
+            ])
+            
+            # Distribution des variables numériques avec histplot
+            if vis_option == "Distribution des Variables Numériques":
+                num_cols = ['Age', 'Na', 'K']
+                for var in num_cols:
+                    fig, ax = plt.subplots(figsize=(5, 3))
+                    sns.histplot(data=df, x=var, stat="density", label="Histogramme", ax=ax)
+                    ax.set_xlabel(var)
+                    ax.set_ylabel("Densité")
+                    ax.set_title(f"Distribution de la variable {var}")
+                    ax.legend()
+                    st.pyplot(fig)
+            
+            # Pairplot des variables numériques
+            elif vis_option == "Pairplot des Variables Numériques":
+                fig = sns.pairplot(df_raw[['Age', 'Na', 'K', 'Drug']], hue='Drug', diag_kind='hist')
+                plt.suptitle("Pairplot des Variables Numériques", y=1.02)
+                st.pyplot(fig)
+            
+            # Distribution des variables qualitatives
+            elif vis_option == "Distribution des Variables Qualitatives":
+                cat_cols = ['Sex', 'BP', 'Cholesterol', 'Drug']
+                for var in cat_cols:
+                    fig, ax = plt.subplots(figsize=(5, 3))
+                    df_raw
