@@ -8,6 +8,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+from PIL import Image
 
 # Configuration de la page
 st.set_page_config(page_title="Analyse de Prescription de Médicaments", layout="wide")
