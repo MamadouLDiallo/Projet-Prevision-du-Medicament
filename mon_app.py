@@ -111,11 +111,6 @@ st.markdown("""
 _Projet réalisé dans le cadre des travaux dirigés en analyse de données médicales._
 """)
 
-# Bouton pour commencer
-if st.button("🚀 Commencer l'analyse"):
-    st.success("Chargement de l'analyse...")  # Ou rediriger vers une autre section
-
-
 # Section de chargement des données
 if menu == "Chargement des Données":
     
