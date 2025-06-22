@@ -76,10 +76,6 @@ if menu == "Accueil":
     
     st.title("🩺Analyse de Prescription d'un médicament")
 
-# Image d'accueil
-#st.image("medicament.png", width=100)  # Image illustrant le projet
-import streamlit as st
-
 # Titre et résumé
 st.markdown("""🎯 Ce projet exploite les données médicales des patients pour recommander le traitement le plus adapté à leur profil, 
       en s’appuyant sur des techniques de machine learning et d’analyse prédictive.""")
