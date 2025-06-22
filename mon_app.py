@@ -74,7 +74,7 @@ def preprocess_data(df):
     # --- Main Application Logic ---
 if menu == "Accueil":
     
-    st.title(" 🩺 Analyse de Prescription d'un médicament")
+    st.title("🩺Analyse de Prescription d'un médicament")
 
 # Image d'accueil
 #st.image("medicament.png", width=100)  # Image illustrant le projet
