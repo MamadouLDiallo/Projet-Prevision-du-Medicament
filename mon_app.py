@@ -30,7 +30,7 @@ if 'drug_labels' not in st.session_state:
     st.session_state.drug_labels = None
 
 # Navigation dans la barre latérale
-st.sidebar.title("Analyse de Prescription d'un médicament")
+#st.sidebar.title("Analyse de Prescription d'un médicament")
 menu = st.sidebar.selectbox("Sélectionner le Menu", [
     "Accueil",
     "Chargement des Données",
@@ -74,7 +74,7 @@ def preprocess_data(df):
     # --- Main Application Logic ---
 if menu == "Accueil":
     
-    st.title("📊 Analyse et Segmentation des clients pour la decision marketing ")
+    st.title("Analyse de Prescription d'un médicament")
     #st.header("📈 Application d'analyse comportementale a partir de données transactionnelles", divider='rainbow')
     try:
         image = Image.open(".jpg")
