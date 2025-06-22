@@ -78,6 +78,8 @@ if menu == "Accueil":
 
 # Titre et résumé
 st.markdown("""🩺Analyse de Prescription d'un médicament
+
+
 🎯 **Ce projet exploite les données médicales des patients pour recommander le traitement le plus adapté à leur profil, 
       en s’appuyant sur des techniques de machine learning et d’analyse prédictive.**""")
 
