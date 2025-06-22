@@ -75,6 +75,8 @@ def preprocess_data(df):
 if menu == "Accueil":
     
   st.title("🩺Analyse de Prescription d'un médicament")
+    
+  st.markdown("## 🩺Analyse de Prescription d'un médicament")
 
 # Titre et résumé
   st.markdown("""🩺Analyse de Prescription d'un médicament
