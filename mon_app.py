@@ -75,28 +75,46 @@ def preprocess_data(df):
 if menu == "Accueil":
     
     st.title("Analyse de Prescription d'un médicament")
-    
-    st.markdown("""""")
 
+# Image d'accueil
+#st.image("medicament.png", width=100)  # Image illustrant le projet
 
-    # Create three columns layout
-    left_column, middle1_column, middle2_column, right_column = st.columns(4)
+# Titre
+st.markdown("""
+# 🩺 Analyse de Prescription d'un Médicament
 
-# Left column - Email
-    left_column.subheader("Nom")
-    left_column.markdown("**Mamadou Lamarana Diallo**")
-    
-# middle1 column - Email
-    middle1_column.subheader("📧 Email")
-    middle1_column.markdown("[mamadoulamaranadiallomld1@gmail.com](mailto:mamadoulamaranadiallomld1@gmail.com)")
+🎯 Ce projet utilise les données médicales pour recommander le traitement le plus adapté à chaque patient grâce au machine learning.
+""")
 
-# Middle2 column - Phone
-    middle2_column.subheader("☎️ Contact ")
-    middle2_column.markdown("[+221 771050342](tel:+221771050342)")
+# Organisation des infos de contact
+col1, col2, col3, col4 = st.columns(4)
 
-# Right column - Linkedin
-    right_column.markdown("""<h3><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20" style="vertical-align: middle;"> LinkedIn</h3> """, unsafe_allow_html=True)
-    right_column.markdown("[Linkedin](https://www.linkedin.com/in/mamadou-lamarana-diallo-937430274/)")
+with col1:
+    st.markdown("**👤 Nom**")
+    st.markdown("Mamadou Lamarana Diallo")
+
+with col2:
+    st.markdown("**📧 Email**")
+    st.markdown("[mamadoulamaranadiallomld1@gmail.com](mailto:mamadoulamaranadiallomld1@gmail.com)")
+
+with col3:
+    st.markdown("**📞 Contact**")
+    st.markdown("+221 771050342")
+
+with col4:
+    st.markdown("**🔗 LinkedIn**")
+    st.markdown("[LinkedIn](https://www.linkedin.com)")
+
+# Contexte
+st.markdown("""
+---
+_Projet réalisé dans le cadre des travaux dirigés en analyse de données médicales._
+""")
+
+# Bouton pour commencer
+if st.button("🚀 Commencer l'analyse"):
+    st.success("Chargement de l'analyse...")  # Ou rediriger vers une autre section
+
 
 # Section de chargement des données
 if menu == "Chargement des Données":
