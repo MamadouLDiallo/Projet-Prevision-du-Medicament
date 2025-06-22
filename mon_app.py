@@ -69,9 +69,19 @@ def preprocess_data(df):
     df_encoded = manual_encoder(df_cleaned, cat_columns)
     return df_encoded
 
+
+    # --- Main Application Logic ---
 if menu == "Accueil":
     
-    st.title("Présentation du mbembre du projet")
+    st.title("📊 Analyse et Segmentation des clients pour la decision marketing ")
+    st.header("📈 Application d'analyse comportementale a partir de données transactionnelles", divider='rainbow')
+    try:
+        image = Image.open(".jpg")
+    except FileNotFoundError:
+        st.warning("L'image 'image_ecommerce.jpg' n'a pas été trouvée. Veuillez vous assurer qu'elle est dans le même répertoire que votre script Streamlit.")
+    st.subheader("Accueil")
+    st.write("aaaaaaa.")
+
     # Create three columns layout
     left_column, middle1_column, middle2_column, right_column = st.columns(4)
 
