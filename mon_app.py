@@ -75,33 +75,8 @@ def preprocess_data(df):
 if menu == "Accueil":
     
     st.title("Analyse de Prescription d'un médicament")
-    try:
-        image = Image.open(".jpg")
-    except FileNotFoundError:
-        st.warning("L'image 'image_ecommerce.jpg' n'a pas été trouvée. Veuillez vous assurer qu'elle est dans le même répertoire que votre script Streamlit.")
-
-  
     
-
-    st.markdown("""
-   # 🩺 Analyse des Médicaments : Quel traitement est le plus adapté ?
-
-     **Bienvenue dans ce projet d’analyse médicale basé sur les données** 
-    **L’objectif est de prédire le traitement le plus adapté à chaque patient en fonction de ses caractéristiques médicales (tels que la pression artérielle, le taux de sodium, de potassium, etc.)**
-
-    **Grâce à des techniques d’analyse de données et de machine learning, nous identifions les patterns qui permettent de recommander le médicament optimal pour chaque profil**
-
----
-
-🔍 **Ce projet permet :**
-- D’explorer les relations entre les variables médicales
-- De construire un modèle de prédiction des traitements
-- D’offrir une aide à la décision rapide et intelligente
-
----
-
-📌 *Ce projet s'inscrit dans une démarche d’optimisation des traitements médicaux à l’aide de la science des données.*
-""")
+    st.markdown()
 
 
     # Create three columns layout
