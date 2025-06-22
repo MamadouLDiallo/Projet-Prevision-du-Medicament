@@ -80,7 +80,8 @@ if menu == "Accueil":
 #st.image("medicament.png", width=100)  # Image illustrant le projet
 
 # Titre
-st.markdown("""🎯 Ce projet utilise les données médicales pour recommander le traitement le plus adapté à chaque patient grâce au machine learning.""")
+st.markdown("""🎯 Ce projet exploite les données médicales des patients pour recommander le traitement le plus adapté à leur profil,
+                   en s’appuyant sur des techniques de machine learning et d’analyse prédictive.""")
 
 # Organisation des infos de contact
 col1, col2, col3, col4 = st.columns(4)
