@@ -80,19 +80,16 @@ if menu == "Accueil":
     except FileNotFoundError:
         st.warning("L'image 'image_ecommerce.jpg' n'a pas été trouvée. Veuillez vous assurer qu'elle est dans le même répertoire que votre script Streamlit.")
 
-    #st.write("Conçue par Mamadou Lamarana Diallo, cette étude utilise l'IA pour optimiser les prescriptions médicales à partir des données des patients.")
-    #st.write("L'application fournit des recommandations précises pour aider les professionnels de santé à améliorer les traitements.")
-    #st.write("Projet conçu par Mamadou Lamarana Diallo pour prédire les prescriptions médicales via l'analyse des données des patients.")
-   # st.write("Cette application aide les professionnels de santé à prendre des décisions thérapeutiques éclairées et personnalisées.")
+  
     
 
     st.markdown("""
    # 🩺 Analyse des Médicaments : Quel traitement est le plus adapté ?
 
-     Bienvenue dans ce projet d’analyse médicale basé sur les données **DrugN**.  
-     L’objectif est de prédire le traitement le plus adapté à chaque patient en fonction de ses caractéristiques médicales (tels que la pression artérielle, le taux de sodium, de potassium, etc.).
+     **Bienvenue dans ce projet d’analyse médicale basé sur les données** 
+    **L’objectif est de prédire le traitement le plus adapté à chaque patient en fonction de ses caractéristiques médicales (tels que la pression artérielle, le taux de sodium, de potassium, etc.)**
 
-     Grâce à des techniques d’analyse de données et de machine learning, nous identifions les patterns qui permettent de recommander le médicament optimal pour chaque profil.
+    **Grâce à des techniques d’analyse de données et de machine learning, nous identifions les patterns qui permettent de recommander le médicament optimal pour chaque profil**
 
 ---
 
