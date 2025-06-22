@@ -30,7 +30,7 @@ if 'drug_labels' not in st.session_state:
     st.session_state.drug_labels = None
 
 # Navigation dans la barre latérale
-st.sidebar.title("Veuillez selectionner les onglets suivants")
+st.sidebar.title("Analyse des Prescriptions Médicales")
 menu = st.sidebar.selectbox("Sélectionner le Menu", [
     "Accueil",
     "Chargement des Données",
