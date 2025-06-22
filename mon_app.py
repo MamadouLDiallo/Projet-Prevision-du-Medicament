@@ -80,7 +80,6 @@ if menu == "Accueil":
         image = Image.open(".jpg")
     except FileNotFoundError:
         st.warning("L'image 'image_ecommerce.jpg' n'a pas été trouvée. Veuillez vous assurer qu'elle est dans le même répertoire que votre script Streamlit.")
-    st.subheader("Accueil")
     st.write("aaaaaaa.")
 
     # Create three columns layout
