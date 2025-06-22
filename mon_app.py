@@ -88,23 +88,6 @@ st.markdown("""🎯 Ce projet exploite les données médicales des patients pour
 st.markdown("---")
 st.markdown("## 👤 Informations personnelles")
 
-# Colonnes pour l'alignement
-col1, col2 = st.columns(2)
-
-with col1:
-    st.markdown("**👤 Nom**")
-    st.markdown("Mamadou Lamarana Diallo")
-    st.markdown(" ")  # Espacement visuel
-
-with col2:
-    st.markdown("**📧 Email**")
-    st.markdown("[mamadoulamaranadiallomld1@gmail.com](mailto:mamadoulamaranadiallomld1@gmail.com)")
-    st.markdown(" ")  # Espacement visuel
-
-# Titre
-st.markdown("""🎯 Ce projet exploite les données médicales des patients pour recommander le traitement le plus adapté à leur profil,
-                   en s’appuyant sur des techniques de machine learning et d’analyse prédictive.""")
-
 # Organisation des infos de contact
 col1, col2, col3, col4 = st.columns(4)
 
