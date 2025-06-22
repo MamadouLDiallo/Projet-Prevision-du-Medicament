@@ -78,6 +78,7 @@ if menu == "Accueil":
     
   #st.markdown("**🩺 ## Analyse de Prescription d'un médicament**")
   st.markdown("## 🩺 Analyse de Prescription d'un médicament")
+  st.markdown("---")
 
 # Titre et résumé
   st.markdown("""🎯 **Ce projet exploite les données médicales des patients pour recommander le traitement le plus adapté à leur profil, 
