@@ -83,6 +83,7 @@ st.markdown("""🎯 Ce projet exploite les données médicales des patients pour
 # Espacement vertical
 st.markdown("---")
 st.markdown("## 👤 Informations personnelles")
+st.markdown("---")
 
 # Organisation des infos de contact
 col1, col2, col3, col4 = st.columns(4)
