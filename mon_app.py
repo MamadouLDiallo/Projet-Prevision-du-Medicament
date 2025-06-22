@@ -75,12 +75,37 @@ def preprocess_data(df):
 if menu == "Accueil":
     
     st.title("Analyse de Prescription d'un médicament")
-    #st.header("📈 Application d'analyse comportementale a partir de données transactionnelles", divider='rainbow')
     try:
         image = Image.open(".jpg")
     except FileNotFoundError:
         st.warning("L'image 'image_ecommerce.jpg' n'a pas été trouvée. Veuillez vous assurer qu'elle est dans le même répertoire que votre script Streamlit.")
-    st.write("aaaaaaa.")
+
+    #st.write("Conçue par Mamadou Lamarana Diallo, cette étude utilise l'IA pour optimiser les prescriptions médicales à partir des données des patients.")
+    #st.write("L'application fournit des recommandations précises pour aider les professionnels de santé à améliorer les traitements.")
+    #st.write("Projet conçu par Mamadou Lamarana Diallo pour prédire les prescriptions médicales via l'analyse des données des patients.")
+   # st.write("Cette application aide les professionnels de santé à prendre des décisions thérapeutiques éclairées et personnalisées.")
+    
+
+   st.markdown("""
+   # 🩺 Analyse des Médicaments : Quel traitement est le plus adapté ?
+
+     Bienvenue dans ce projet d’analyse médicale basé sur les données **DrugN**.  
+     L’objectif est de prédire le traitement le plus adapté à chaque patient en fonction de ses caractéristiques médicales (tels que la pression artérielle, le taux de sodium, de potassium, etc.).
+
+     Grâce à des techniques d’analyse de données et de machine learning, nous identifions les patterns qui permettent de recommander le médicament optimal pour chaque profil.
+
+---
+
+🔍 **Ce projet permet :**
+- D’explorer les relations entre les variables médicales
+- De construire un modèle de prédiction des traitements
+- D’offrir une aide à la décision rapide et intelligente
+
+---
+
+📌 *Ce projet s'inscrit dans une démarche d’optimisation des traitements médicaux à l’aide de la science des données.*
+""")
+
 
     # Create three columns layout
     left_column, middle1_column, middle2_column, right_column = st.columns(4)
