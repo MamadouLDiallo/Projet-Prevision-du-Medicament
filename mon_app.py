@@ -86,7 +86,7 @@ if menu == "Accueil":
    # st.write("Cette application aide les professionnels de santé à prendre des décisions thérapeutiques éclairées et personnalisées.")
     
 
-   st.markdown("""
+    st.markdown("""
    # 🩺 Analyse des Médicaments : Quel traitement est le plus adapté ?
 
      Bienvenue dans ce projet d’analyse médicale basé sur les données **DrugN**.  
