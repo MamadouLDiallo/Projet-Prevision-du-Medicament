@@ -12,6 +12,49 @@ import plotly.express as px
 # Configuration de la page
 st.set_page_config(page_title="Analyse de Prescription de Médicaments", layout="wide")
 
+# Style CSS personnalisé
+st.markdown("""
+    <style>
+    .main-header {
+        text-align: center;
+        font-size: 36px;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+    .sub-header {
+        font-size: 24px;
+        color: #34495e;
+        margin-top: 20px;
+    }
+    .member-card {
+        border: 1px solid #dcdcdc;
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .member-card img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+    }
+    .member-card p {
+        margin: 5px 0;
+        font-size: 16px;
+        color: #555;
+    }
+    .member-card a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    .member-card a:hover {
+        text-decoration: underline;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Initialisation de l'état de la session
 if 'df' not in st.session_state:
     st.session_state.df = None
@@ -69,33 +112,36 @@ def preprocess_data(df):
     df_encoded = manual_encoder(df_cleaned, cat_columns)
     return df_encoded
 
+# Section Accueil
 if menu == "Accueil":
+    st.markdown('<div class="main-header">Analyse de Prescription de Médicaments</div>', unsafe_allow_html=True)
     
-    st.title("Présentation du mbembre du projet")
-    # Create three columns layout
-    left_column, middle1_column, middle2_column, right_column = st.columns(4)
-
-# Left column - Email
-    left_column.subheader("Nom")
-    left_column.markdown("**Mamadou Lamarana Diallo**")
+    # Image d'en-tête
+    st.image("https://cdn-icons-png.flaticon.com/512/2933/2933998.png", width=200)
     
-# middle1 column - Email
-    middle1_column.subheader("📧 Email")
-    middle1_column.markdown("[mamadoulamaranadiallomld1@gmail.com](mailto:mamadoulamaranadiallomld1@gmail.com)")
-
-# Middle2 column - Phone
-    middle2_column.subheader("☎️ Contact ")
-    middle2_column.markdown("[+221 771050342](tel:+221771050342)")
-
-# Right column - Linkedin
-    right_column.markdown("""<h3><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20" style="vertical-align: middle;"> LinkedIn</h3> """, unsafe_allow_html=True)
-    right_column.markdown("[Linkedin](https://www.linkedin.com/in/mamadou-lamarana-diallo-937430274/)")
+    # Description du projet
+    st.markdown("""
+        <div class="sub-header">À propos du projet</div>
+        Cette application Streamlit permet de prédire le médicament approprié pour un patient en fonction de ses caractéristiques médicales, telles que l'âge, la pression artérielle, le cholestérol, et les niveaux de sodium et potassium. Elle inclut des fonctionnalités d'analyse descriptive, de visualisation des données, d'entraînement de modèle, et de prédiction basée sur un modèle Random Forest.
+    """, unsafe_allow_html=True)
+    
+    # Présentation du membre
+    st.markdown('<div class="sub-header">Membre du projet</div>', unsafe_allow_html=True)
+    with st.container():
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            st.markdown("""
+                <div class="member-card">
+                    <p><strong>Mamadou Lamarana Diallo</strong></p>
+                    <p>📧 <a href="mailto:mamadoulamaranadiallomld1@gmail.com">mamadoulamaranadiallomld1@gmail.com</a></p>
+                    <p>☎️ <a href="tel:+221771050342">+221 771050342</a></p>
+                    <p>🔗 <a href="https://www.linkedin.com/in/mamadou-lamarana-diallo-937430274/" target="_blank">LinkedIn</a></p>
+                </div>
+            """, unsafe_allow_html=True)
 
 # Section de chargement des données
 if menu == "Chargement des Données":
-    
-    #st.title("Chargement des Données")
-    
+    st.title("Chargement des Données")
     uploaded_file = st.file_uploader("Importer votre fichier Excel", type=["xlsx"])
     
     if uploaded_file is not None:
@@ -243,7 +289,7 @@ if menu == "Visualisations":
             elif vis_option == "Sexe vs Médicament":
                 crosstab = pd.crosstab(df_raw['Sex'], df_raw['Drug'])
                 fig, ax = plt.subplots(figsize=(10, 6))
-                crosstab.plot(kind='bar', stacstked=True, ax=ax)
+                crosstab.plot(kind='bar', stacked=True, ax=ax)
                 ax.set_title("Sexe vs Médicament")
                 ax.set_xlabel("Sexe")
                 ax.set_ylabel("Nombre")
@@ -336,41 +382,40 @@ if menu == "Prédiction pour Patient":
                 new_data[col] = st.sidebar.selectbox("Cholestérol :", ['NORMAL', 'HIGH'])
             elif col == 'Age':
                 new_data[col] = st.sidebar.number_input("Âge :", min_value=1, max_value=100, value=30)
-            #elif col == 'Na':
-                #new_data[col] = st.sidebar.number_input("Sodium (Na) [mmol/L] :", min_value=100.0, max_value=160.0, value=140.0, step=0.5)
-            #elif col == 'K':
-                #new_data[col] = st.sidebar.number_input("Potassium (K) [mmol/L] :", min_value=2.0, max_value=7.0, value=4.0, step=0.1)
-             
             elif col == 'Na':
-                    new_data[col] = st.sidebar.number_input("Sodium (Na) :", min_value=0.0, max_value=1.0, value=0.7, step=0.01)
+                new_data[col] = st.sidebar.number_input("Sodium (Na) :", min_value=0.0, max_value=1.0, value=0.7, step=0.01)
             elif col == 'K':
                 new_data[col] = st.sidebar.number_input("Potassium (K) :", min_value=0.0, max_value=0.1, value=0.05, step=0.001)
-        # Calculer le ratio Na/K
-        new_data['Na_sur_K'] = new_data['Na'] / new_data['K']
         
-        # Créer un DataFrame
-        new_data_df = pd.DataFrame([new_data])
-        new_data_df = manual_encoder(new_data_df, ['BP', 'Cholesterol'])
-        
-        # Assurer l'ordre des colonnes
-        new_data_df = new_data_df[st.session_state.X_train.columns]
-        
-        if st.sidebar.button("Prédire le Médicament"):
-            # Mettre à l'échelle les données
-            new_data_scaled = st.session_state.scaler.transform(new_data_df)
+        # Calculer le ratio Na/K avec vérification
+        if new_data.get('K', 0) == 0:
+            st.error("La valeur de Potassium (K) ne peut pas être zéro.")
+        else:
+            new_data['Na_sur_K'] = new_data['Na'] / new_data['K']
             
-            # Faire la prédiction
-            prediction = st.session_state.model.predict(new_data_scaled)[0]
-            prediction_proba = st.session_state.model.predict_proba(new_data_scaled)[0]
+            # Créer un DataFrame
+            new_data_df = pd.DataFrame([new_data])
+            new_data_df = manual_encoder(new_data_df, ['BP', 'Cholesterol'])
             
-            # Décoder la prédiction
-            predicted_drug = st.session_state.drug_labels[prediction]
+            # Assurer l'ordre des colonnes
+            new_data_df = new_data_df[st.session_state.X_train.columns]
             
-            st.subheader("Résultats de la Prédiction")
-            st.write(f"Médicament Recommandé : **{predicted_drug}**")
-            st.write("Probabilités de Prédiction :")
-            drug_labels = st.session_state.drug_labels
-            for drug, prob in zip(drug_labels, prediction_proba):
-                st.write(f"{drug}: {prob:.3f}")
+            if st.sidebar.button("Prédire le Médicament"):
+                # Mettre à l'échelle les données
+                new_data_scaled = st.session_state.scaler.transform(new_data_df)
+                
+                # Faire la prédiction
+                prediction = st.session_state.model.predict(new_data_scaled)[0]
+                prediction_proba = st.session_state.model.predict_proba(new_data_scaled)[0]
+                
+                # Décoder la prédiction
+                predicted_drug = st.session_state.drug_labels[prediction]
+                
+                st.subheader("Résultats de la Prédiction")
+                st.write(f"Médicament Recommandé : **{predicted_drug}**")
+                st.write("Probabilités de Prédiction :")
+                drug_labels = st.session_state.drug_labels
+                for drug, prob in zip(drug_labels, prediction_proba):
+                    st.write(f"{drug}: {prob:.3f}")
     else:
         st.warning("Veuillez entraîner le modèle d'abord dans la section Entraînement du Modèle.")
