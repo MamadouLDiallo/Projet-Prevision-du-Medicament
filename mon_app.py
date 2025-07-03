@@ -8,6 +8,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
+from PIL import Image
 
 # Configuration de la page
 st.set_page_config(page_title="Analyse de Prescription de Médicaments", layout="wide")
@@ -69,42 +70,46 @@ def preprocess_data(df):
     df_encoded = manual_encoder(df_cleaned, cat_columns)
     return df_encoded
 
-# Section Accueil
+
+    # --- Main Application Logic ---
 if menu == "Accueil":
-    st.markdown("## 🩺 **Analyse de Prescription d'un médicament**")
-    st.markdown("---")
     
-    # Description du projet
-    st.markdown("""🎯 **Ce projet exploite les données médicales des patients pour recommander le traitement le plus adapté à leur profil, 
-    en s’appuyant sur des techniques de machine learning et d’analyse prédictive.**""")
-    
-    # Espacement vertical
-    st.markdown("---")
-    st.markdown("## 👤 Informations personnelles")
-    st.markdown("---")
-    
-    # Organisation des infos de contact
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        st.markdown("**👤 Nom**")
-        st.markdown("**Mamadou Lamarana Diallo**")
-    
-    with col2:
-        st.markdown("**📧 Email**")
-        st.markdown("[mamadoulamaranadiallomld1@gmail.com](mailto:mamadoulamaranadiallomld1@gmail.com)")
-    
-    with col3:
-        st.markdown("**📞 Contact**")
-        st.markdown("[+221 771050342](tel:+221771050342)")
-    
-    with col4:
-        st.markdown("**🔗 LinkedIn**")
-        st.markdown("""<img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="20" style="vertical-align: middle;"> [LinkedIn](https://www.linkedin.com/in/mamadou-lamarana-diallo-937430274/)""", unsafe_allow_html=True)
+  st.markdown("## 🩺 **Analyse de Prescription d'un médicament**")
+  st.markdown("---")
+
+# Titre et résumé
+  st.markdown("""🎯 **Ce projet exploite les données médicales des patients pour recommander le traitement le plus adapté à leur profil, 
+      en s’appuyant sur des techniques de machine learning et d’analyse prédictive.**""")
+
+# Espacement vertical
+st.markdown("---")
+st.markdown("## 👤 Informations personnelles")
+st.markdown("---")
+
+# Organisation des infos de contact
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.markdown("**👤 Nom**")
+    st.markdown("**Mamadou Lamarana Diallo**")
+
+with col2:
+    st.markdown("**📧 Email**")
+    st.markdown("[mamadoulamaranadiallomld1@gmail.com](mailto:mamadoulamaranadiallomld1@gmail.com)")
+
+with col3:
+    st.markdown("**📞 Contact**")
+    st.markdown("+221 771050342")
+
+with col4:
+    st.markdown("**🔗 LinkedIn**")
+    st.markdown("[LinkedIn](https://www.linkedin.com)")
 
 # Section de chargement des données
 if menu == "Chargement des Données":
+    
     st.title("Chargement des Données")
+    
     uploaded_file = st.file_uploader("Importer votre fichier Excel", type=["xlsx"])
     
     if uploaded_file is not None:
@@ -252,7 +257,7 @@ if menu == "Visualisations":
             elif vis_option == "Sexe vs Médicament":
                 crosstab = pd.crosstab(df_raw['Sex'], df_raw['Drug'])
                 fig, ax = plt.subplots(figsize=(10, 6))
-                crosstab.plot(kind='bar', stacked=True, ax=ax)
+                crosstab.plot(kind='bar', stacstked=True, ax=ax)
                 ax.set_title("Sexe vs Médicament")
                 ax.set_xlabel("Sexe")
                 ax.set_ylabel("Nombre")
@@ -272,4 +277,114 @@ if menu == "Entraînement du Modèle":
             y = df['Drug']
             
             # Encoder la variable cible
-            df_encoded = manual_encoder(df, ['Drug
+            df_encoded = manual_encoder(df, ['Drug'])
+            y_encoded = df_encoded['Drug']
+            
+            # Diviser les données
+            X_train, X_test, y_train, y_test = train_test_split(X, y_encoded, test_size=0.3, random_state=42)
+            st.session_state.X_train = X_train
+            st.session_state.X_test = X_test
+            st.session_state.y_train = y_train
+            st.session_state.y_test = y_test
+            
+            # Mettre à l'échelle les features
+            scaler = StandardScaler()
+            X_train_scaled = scaler.fit_transform(X_train)
+            X_test_scaled = scaler.transform(X_test)
+            st.session_state.scaler = scaler
+            
+            # Entraîner le modèle
+            model = RandomForestClassifier(random_state=42)
+            model.fit(X_train_scaled, y_train)
+            st.session_state.model = model
+            
+            # Évaluation du modèle
+            y_pred = model.predict(X_test_scaled)
+            accuracy = accuracy_score(y_test, y_pred)
+            
+            st.subheader("Performance du Modèle")
+            st.write(f"Précision : {accuracy:.3f}")
+            
+            # Rapport de classification
+            st.subheader("Rapport de Classification")
+            drug_labels = st.session_state.drug_labels
+            report = classification_report(y_test, y_pred, target_names=drug_labels, output_dict=True)
+            st.dataframe(pd.DataFrame(report).transpose())
+            
+            # Matrice de confusion
+            st.subheader("Matrice de Confusion")
+            cm = confusion_matrix(y_test, y_pred)
+            fig, ax = plt.subplots()
+            sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=drug_labels, yticklabels=drug_labels)
+            plt.xlabel('Prédit')
+            plt.ylabel('Vrai')
+            st.pyplot(fig)
+            
+            # Scores d'entraînement et de test
+            st.subheader("Scores d'Entraînement et de Test")
+            results = pd.DataFrame({
+                'nom': ['RandomForest'],
+                'train_score': [model.score(scaler.transform(X_train), y_train) * 100],
+                'test_score': [model.score(scaler.transform(X_test), y_test) * 100]
+            })
+            fig, ax = plt.subplots(figsize=(5, 3))
+            results.set_index('nom')[["train_score", "test_score"]].plot.bar(ax=ax)
+            ax.set_title("Scores d'Entraînement et de Test (%)")
+            ax.set_ylabel("Score (%)")
+            st.pyplot(fig)
+    else:
+        st.warning("Veuillez charger un fichier de données d'abord.")
+
+# Section de prédiction pour un patient
+if menu == "Prédiction pour Patient":
+    st.title("Le type de Médicament à prescrire pour un nouveau Patient")
+    if st.session_state.model is not None and st.session_state.X_train is not None and st.session_state.drug_labels is not None:
+        st.sidebar.header("Informations du Patient")
+        
+        # Formulaire d'entrée
+        new_data = {}
+        for col in st.session_state.X_train.columns:
+            if col == 'BP':
+                new_data[col] = st.sidebar.selectbox("Pression Artérielle :", ['LOW', 'NORMAL', 'HIGH'])
+            elif col == 'Cholesterol':
+                new_data[col] = st.sidebar.selectbox("Cholestérol :", ['NORMAL', 'HIGH'])
+            elif col == 'Age':
+                new_data[col] = st.sidebar.number_input("Âge :", min_value=1, max_value=100, value=30)
+            #elif col == 'Na':
+                #new_data[col] = st.sidebar.number_input("Sodium (Na) [mmol/L] :", min_value=100.0, max_value=160.0, value=140.0, step=0.5)
+            #elif col == 'K':
+                #new_data[col] = st.sidebar.number_input("Potassium (K) [mmol/L] :", min_value=2.0, max_value=7.0, value=4.0, step=0.1)
+             
+            elif col == 'Na':
+                    new_data[col] = st.sidebar.number_input("Sodium (Na) :", min_value=0.0, max_value=1.0, value=0.7, step=0.01)
+            elif col == 'K':
+                new_data[col] = st.sidebar.number_input("Potassium (K) :", min_value=0.0, max_value=0.1, value=0.05, step=0.001)
+        # Calculer le ratio Na/K
+        new_data['Na_sur_K'] = new_data['Na'] / new_data['K']
+        
+        # Créer un DataFrame
+        new_data_df = pd.DataFrame([new_data])
+        new_data_df = manual_encoder(new_data_df, ['BP', 'Cholesterol'])
+        
+        # Assurer l'ordre des colonnes
+        new_data_df = new_data_df[st.session_state.X_train.columns]
+        
+        if st.sidebar.button("Prédire le Médicament"):
+            # Mettre à l'échelle les données
+            new_data_scaled = st.session_state.scaler.transform(new_data_df)
+            
+            # Faire la prédiction
+            prediction = st.session_state.model.predict(new_data_scaled)[0]
+            prediction_proba = st.session_state.model.predict_proba(new_data_scaled)[0]
+            
+            # Décoder la prédiction
+            predicted_drug = st.session_state.drug_labels[prediction]
+            
+            st.subheader("Résultats de la Prédiction")
+            st.write(f"Médicament Recommandé : **{predicted_drug}**")
+            st.write("Probabilités de Prédiction :")
+            drug_labels = st.session_state.drug_labels
+            for drug, prob in zip(drug_labels, prediction_proba):
+                st.write(f"{drug}: {prob:.3f}")
+    else:
+        st.warning("Veuillez entraîner le modèle d'abord dans la section Entraînement du Modèle.")
