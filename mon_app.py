@@ -51,7 +51,7 @@ def manual_encoder(df, columns):
         elif var == 'Drug':
             # Définir l'ordre des modalités pour Drug
             drug_labels = ['drugA', 'drugB', 'drugC', 'drugX', 'drugY']
-            drug_values = [0, 1, 2, 3, 4]  # Start at 0 for compatibility with RandomForestClassifier
+            drug_values = [1, 2, 3, 4,5]  # Start at 0 for compatibility with RandomForestClassifier
             df_encoded[var] = df_encoded[var].replace(drug_labels, drug_values)
             # Stocker drug_labels pour le décodage
             if 'Drug' in columns and st.session_state.drug_labels is None:
