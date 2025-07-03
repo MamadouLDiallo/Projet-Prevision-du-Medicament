@@ -82,9 +82,9 @@ if menu == "Accueil":
       en s’appuyant sur des techniques de machine learning et d’analyse prédictive.**""")
 
 # Espacement vertical
-st.markdown("---")
-st.markdown("## 👤 Informations personnelles")
-st.markdown("---")
+  st.markdown("---")
+  st.markdown("## 👤 Informations personnelles")
+  st.markdown("---")
 
 # Organisation des infos de contact
 col1, col2, col3, col4 = st.columns(4)
