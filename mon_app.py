@@ -350,10 +350,7 @@ if menu == "Prédiction pour Patient":
                 new_data[col] = st.sidebar.selectbox("Cholestérol :", ['NORMAL', 'HIGH'])
             elif col == 'Age':
                 new_data[col] = st.sidebar.number_input("Âge :", min_value=1, max_value=100, value=30)
-            #elif col == 'Na':
-                #new_data[col] = st.sidebar.number_input("Sodium (Na) [mmol/L] :", min_value=100.0, max_value=160.0, value=140.0, step=0.5)
-            #elif col == 'K':
-                #new_data[col] = st.sidebar.number_input("Potassium (K) [mmol/L] :", min_value=2.0, max_value=7.0, value=4.0, step=0.1)
+        
              
             elif col == 'Na':
                     new_data[col] = st.sidebar.number_input("Sodium (Na) :", min_value=0.0, max_value=1.0, value=0.7, step=0.01)
