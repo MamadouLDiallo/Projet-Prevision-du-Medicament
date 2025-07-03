@@ -257,7 +257,7 @@ if menu == "Visualisations":
             elif vis_option == "Sexe vs Médicament":
                 crosstab = pd.crosstab(df_raw['Sex'], df_raw['Drug'])
                 fig, ax = plt.subplots(figsize=(10, 6))
-                crosstab.plot(kind='bar', stacstked=True, ax=ax)
+                crosstab.plot(kind='bar', stacked=True, ax=ax)
                 ax.set_title("Sexe vs Médicament")
                 ax.set_xlabel("Sexe")
                 ax.set_ylabel("Nombre")
