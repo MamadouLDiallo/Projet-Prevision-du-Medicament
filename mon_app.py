@@ -89,19 +89,19 @@ if menu == "Accueil":
     # Organisation des infos de contact
   col1, col2, col3, col4 = st.columns(4)
     
-    with col1:
+  with col1:
         st.markdown("**👤 Nom**")
         st.markdown("**Mamadou Lamarana Diallo**")
     
-    with col2:
+  with col2:
         st.markdown("**📧 Email**")
         st.markdown("[mamadoulamaranadiallomld1@gmail.com](mailto:mamadoulamaranadiallomld1@gmail.com)")
     
-    with col3:
+  with col3:
         st.markdown("**📞 Contact**")
         st.markdown("+221 771050342")
     
-    with col4:
+  with col4:
         st.markdown("**🔗 LinkedIn**")
         st.markdown("[LinkedIn](https://www.linkedin.com)")
 
