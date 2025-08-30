@@ -388,3 +388,4 @@ if menu == "Prédiction pour Patient":
         st.warning("Veuillez entraîner le modèle d'abord dans la section Entraînement du Modèle.")
 
 
+
