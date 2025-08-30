@@ -195,7 +195,8 @@ if menu == "Visualisations":
                 num_cols = ['Age', 'Na', 'K']
                 for var in num_cols:
                     fig, ax = plt.subplots(figsize=(5, 3))
-                    sns.histplot(data=df, x=var, stat="density", kde=True, label="Histogramme", ax=ax)
+                    sns.histplot(data=df, x=var, stat="density", color="skyblue", kde=False, ax=ax)  # Histogramme bleu
+                    sns.kdeplot(data=df, x=var, color="red", lw=2, ax=ax)  # Courbe KDE rouge
                     ax.set_xlabel(var)
                     ax.set_ylabel("Densité")
                     ax.set_title(f"Distribution de la variable {var}")
@@ -385,4 +386,5 @@ if menu == "Prédiction pour Patient":
                 st.write(f"{drug}: {prob:.3f}")
     else:
         st.warning("Veuillez entraîner le modèle d'abord dans la section Entraînement du Modèle.")
+
 
