@@ -29,7 +29,7 @@ Cette application, développée avec Streamlit, permet de :
 ---
 
 ## 📷 Aperçu du tableau de bord
-![Dashboard](https://raw.githubusercontent.com/MamadouLDiallo/Tableau-de-bord-des-performances-commerciales/main/image.jpg)
+!https://github.com/MamadouLDiallo/Projet-Prevision-du-Medicament/blob/main/Projet%20M%C3%A9dicament.jpg)
 ---
 
 ## 👨‍💻 Auteur
