@@ -1,16 +1,32 @@
-🔥 Projet Data Science : IA pour des prescriptions médicales optimisées
+# 🔥 Projet Data Science : IA pour des prescriptions médicales optimisées
 
- J’ai développé une application web avec Streamlit qui analyse les données patients et recommande le médicament le plus adapté grâce à un modèle d’IA performant.
+## 🎯 Objectif
+Développer une application web capable d’analyser les données patients et de recommander le médicament le plus adapté grâce à un modèle de machine learning.
 
-🎯 Objectif : Personnalisation des traitements et soutien à la décision médicale.
+## 💡 Description
+Cette application, développée avec Streamlit, permet de :
+- Explorer les données patients
+- Visualiser les variables clés via des graphiques interactifs
+- Prédire en temps réel le traitement le plus approprié
 
-💡 De la donnée à la prescription en quelques clics :
+## ⚙️ Pipeline du projet
+- Exploration et nettoyage des données
+- Analyse exploratoire (EDA)
+- Modélisation (Machine Learning)
+- Évaluation du modèle
+- Déploiement avec Streamlit
 
-✔️ Étapes clés du projet :
+## 🤖 Modèle utilisé
+(à compléter : ex. Random Forest / Logistic Regression / XGBoost…)
 
- ✅ Exploration des données 
- ✅ Visualisations interactives 
- ✅ Modélisation
- ✅ Prédiction en temps réel.
+## 📊 Technologies
+- Python
+- Pandas
+- scikit-learn
+- Plotly
+- Streamlit
 
-📌 Technologies : Python | Pandas | scikit-learn | Plotly | Streamlit
+## 🚀 Lancer le projet
+```bash
+pip install -r requirements.txt
+streamlit run app.py
