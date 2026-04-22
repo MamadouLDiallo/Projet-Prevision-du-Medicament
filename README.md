@@ -23,7 +23,7 @@ Cette application, développée avec Streamlit, permet de :
  ---
 
 ## 🤖 Modèle utilisé
-(à compléter : ex. Random Forest / Logistic Regression /)
+- RandomForestClassifier
 
 ## 📊 Technologies
 - Python
@@ -36,6 +36,8 @@ Cette application, développée avec Streamlit, permet de :
 
 ## 📷 Aperçu du tableau de bord
 <img width="1113" height="647" alt="image" src="https://github.com/MamadouLDiallo/Projet-Prevision-du-Medicament/blob/main/Medicament.jpg" />
+
+
 ---
 
 ## 👨‍💻 Auteur
