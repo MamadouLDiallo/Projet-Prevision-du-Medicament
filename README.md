@@ -42,13 +42,17 @@ Cette application, développée avec Streamlit, permet de :
 
 ## 👨‍💻 Auteur
 
-**Mamadou Lamarana Diallo**
- Diplomé d'un **Master en Statistique et Informatique Décisionnelle**
+**Mamadou Lamarana Diallo**  
+🎓 Diplômé d’un Master en Statistique et Informatique Décisionnelle  
 
-Domaines d’intérêt :
+### 🔍 Domaines d’intérêt
+- Analyse de données  
+- Machine Learning  
+- Visualisation de données  
+- Veille stratégique  
 
-* Data Analysis
-* Business Intelligence
-* Machine Learning
-* Data Visualization
+### 🔗 Me contacter
+- LinkedIn : https://www.linkedin.com/in/mamadou-lamarana-diallo-937430274/  
+- GitHub : https://github.com/MamadouLDiallo
+
 
