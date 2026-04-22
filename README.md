@@ -26,4 +26,21 @@ Cette application, développée avec Streamlit, permet de :
 - Plotly
 - Streamlit
 
-📷 Aperçu de l'application
+---
+
+## 📷 Aperçu du tableau de bord
+![Dashboard](https://raw.githubusercontent.com/MamadouLDiallo/Tableau-de-bord-des-performances-commerciales/main/image.jpg)
+---
+
+## 👨‍💻 Auteur
+
+**Mamadou Lamarana Diallo**
+ Diplomé d'un **Master en Statistique et Informatique Décisionnelle**
+
+Domaines d’intérêt :
+
+* Data Analysis
+* Business Intelligence
+* Machine Learning
+* Data Visualization
+
