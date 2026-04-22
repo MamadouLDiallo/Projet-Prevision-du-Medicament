@@ -29,7 +29,7 @@ Cette application, développée avec Streamlit, permet de :
 ---
 
 ## 📷 Aperçu du tableau de bord
-!https://github.com/MamadouLDiallo/Projet-Prevision-du-Medicament/blob/main/Projet%20M%C3%A9dicament.jpg)
+<img width="1113" height="647" alt="image" src="https://github.com/MamadouLDiallo/Projet-Prevision-du-Medicament/blob/main/Projet%20M%C3%A9dicament.jpg" />
 ---
 
 ## 👨‍💻 Auteur
