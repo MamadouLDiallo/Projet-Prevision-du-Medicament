@@ -26,7 +26,4 @@ Cette application, développée avec Streamlit, permet de :
 - Plotly
 - Streamlit
 
-## 🚀 Lancer le projet
-```bash
-pip install -r requirements.txt
-streamlit run app.py
+📷 Aperçu de l'application
